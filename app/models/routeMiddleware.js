@@ -1,8 +1,8 @@
 import * as config from "../../config";
 
-var jwt = require('jsonwebtoken');
-var express = require('express');
-var app = express();
+let jwt = require('jsonwebtoken');
+let express = require('express');
+let app = express();
 
 app.set('superSecret', config.secret);
 

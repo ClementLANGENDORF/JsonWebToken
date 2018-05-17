@@ -2,10 +2,10 @@ import {findUserByName} from "./user";
 import * as config from "../../config";
 
 
-var jwt = require('jsonwebtoken');
-var express = require('express');
-var app = express();
-var sha1 = require('sha1');
+let jwt = require('jsonwebtoken');
+let express = require('express');
+let app = express();
+let sha1 = require('sha1');
 
 app.set('superSecret', config.secret);
 
