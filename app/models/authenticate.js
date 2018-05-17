@@ -5,6 +5,7 @@ import * as config from "../../config";
 var jwt = require('jsonwebtoken');
 var express = require('express');
 var app = express();
+var sha1 = require('sha1');
 
 app.set('superSecret', config.secret);
 
@@ -17,7 +18,7 @@ export const authenticate = async function ({name, password}) {
     } else if (user) {
 
         // check if password matches
-        if (user._password !== password) {
+        if (user._password !== sha1(password)) {
             return ({success: false, message: 'Authentication failed. Wrong password.'});
         } else {
 
