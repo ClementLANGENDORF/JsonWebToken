@@ -1,9 +1,5 @@
-import {routeMiddleware} from "./app/models/routeMiddleware";
-import {findUsers} from "./app/models/user";
 import {run} from "./app/models/run";
-import {authenticate} from "./app/models/authenticate";
-import {check} from "express-validator/check/index";
-import {setupUser} from "./app/models/setupUser";
+import {Route} from "./app/models";
 
 export const loadApp = () => {
 
@@ -31,48 +27,7 @@ export const loadApp = () => {
     app.use(bodyParser.json());
     app.use(morgan('dev'));
 
-
-// =======================
-// routes ================
-// =======================
-// basic route
-    app.get('/', function (req, res) {
-        res.send('Hello! The APy is at http://localhost:' + port + '/api');
-    });
-
-
-    app.get('/setup', setupUser);
-
-// API ROUTES
-
-    // get an instance of the router for api routes
-    var apiRoutes = express.Router();
-
-
-    // route to authenticate a user (POST http://localhost:8080/api/authenticate)
-    apiRoutes.post('/authenticate',
-        [
-            check('name').isLength({min: 2}).matches(/^.+/),
-            check('password').isLength({min: 2}).matches(/^.+/),
-
-        ],
-        run(authenticate));
-// route middleware
-    apiRoutes.use(routeMiddleware);
-
-
-    apiRoutes.get('/', function (req, res) {
-        res.json({message: 'Welcome to the API !!'});
-    });
-
-
-//route to return all users
-
-    apiRoutes.get('/user', run(findUsers));
-
-
-    app.use('/api', apiRoutes);
-
+    run(Route);
 
 // =======================
 // start the server ======
