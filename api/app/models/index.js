@@ -13,7 +13,7 @@ export const Route = () => {
 // =======================
 // basic route
     app.get('/', function (req, res) {
-        res.send('Hello! The APy is at http://localhost:' + port + '/api');
+        res.render('HelloWorld', { name: 'HelloWorld'});
     });
 
 
